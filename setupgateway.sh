@@ -14,9 +14,8 @@ then
 	echo "Usage: $0 <outside_net> <inside_net>"
 	exit $E_INVAL
 fi
-#
+
 # delete all existing rules.
-#
 iptables -F
 iptables -t nat -F
 iptables -t mangle -F
@@ -24,7 +23,6 @@ iptables -X
 
 # Always accept loopback traffic
 iptables -A INPUT -i lo -j ACCEPT
-
 
 # Allow established connections, and those not coming from the outside
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
