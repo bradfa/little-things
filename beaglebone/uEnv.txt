@@ -1,0 +1,2 @@
+uenvcmd=dhcp; run tftploadfdt; run mmcboot;
+tftploadfdt=tftp ${fdtaddr} ${fdtfile}
