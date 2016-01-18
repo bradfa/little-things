@@ -1,25 +1,31 @@
-#!/bin/sh
+#!/bin/bash
 
 PATH=/usr/sbin:/sbin:/bin:/usr/bin
 
-if [ -z "$1" ]
-then
-	echo Error: No outside network device
-	echo "Usage: $0 <outside_net> <inside_net>"
+usage() {
+	echo "usage:	$0 flush"
+	echo "	$0 <outside_net> <inside_net>"
 	exit $E_INVAL
+}
+
+if [ $# -eq 1 ]; then
+	if [ "$1" == "flush" ]; then
+		# delete all existing rules.
+		iptables -v -F
+		iptables -v -t nat -F
+		iptables -v -t mangle -F
+		iptables -v -X
+		# Disable routing.
+		echo 0 > /proc/sys/net/ipv4/ip_forward
+		exit
+	fi
 fi
+
 if [ -z "$2" ]
 then
 	echo Error: No inside network device
-	echo "Usage: $0 <outside_net> <inside_net>"
-	exit $E_INVAL
+	usage
 fi
-
-# delete all existing rules.
-iptables -F
-iptables -t nat -F
-iptables -t mangle -F
-iptables -X
 
 # Always accept loopback traffic
 iptables -A INPUT -i lo -j ACCEPT
