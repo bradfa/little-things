@@ -28,21 +28,21 @@ then
 fi
 
 # Always accept loopback traffic
-iptables -A INPUT -i lo -j ACCEPT
+iptables -v -A INPUT -i lo -j ACCEPT
 
 # Allow established connections, and those not coming from the outside
-iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A INPUT -m state --state NEW ! -i $1 -j ACCEPT
-iptables -A FORWARD -i $1 -o $2 -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -v -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -v -A INPUT -m state --state NEW ! -i $1 -j ACCEPT
+iptables -v -A FORWARD -i $1 -o $2 -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 # Allow outgoing connections from the LAN side.
-iptables -A FORWARD -i $2 -o $1 -j ACCEPT
+iptables -v -A FORWARD -i $2 -o $1 -j ACCEPT
 
 # Masquerade.
-iptables -t nat -A POSTROUTING -o $1 -j MASQUERADE
+iptables -v -t nat -A POSTROUTING -o $1 -j MASQUERADE
 
 # Don't forward from the outside to the inside.
-iptables -A FORWARD -i $1 -o $2 -j REJECT
+iptables -v -A FORWARD -i $1 -o $2 -j REJECT
 
 # Enable routing.
 echo 1 > /proc/sys/net/ipv4/ip_forward
