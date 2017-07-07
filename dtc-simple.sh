@@ -1,5 +1,5 @@
 #!/bin/bash
-# A one step process to turn a dts file into a dtb from within linux's dtb dir
+# A one step process to turn a dts file into a dtb from within linux's dts/ dir
 
 set -e
 if [ $1 ]; then
