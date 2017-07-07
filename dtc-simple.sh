@@ -4,8 +4,9 @@
 set -e
 if [ $1 ]; then
 	OUTPUT=$(echo ${1} | sed -e "s/dts/dtb/")
-	cpp -nostdinc -I . -I include -undef -D__DTS__ -x assembler-with-cpp $1 | dtc -I dts -i . -O dtb -o ${OUTPUT}
+	cpp -nostdinc -I . -I ../../../../include -undef -D__DTS__ -x assembler-with-cpp $1 | dtc -@ -I dts -i . -O dtb -o ${OUTPUT}
 else
-	echo "Creates a .dtb from a .dts using the cpp prior to dtc tool"
+	echo "Creates a .dtb from a .dts using the cpp prior to dtc tool."
+	echo "Supports creation of device tree overlay .dtb files."
 	echo "Usage: ${0} dtsfile.dts"
 fi
