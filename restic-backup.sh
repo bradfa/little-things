@@ -2,7 +2,7 @@
 
 # Do a restic backup to the directory/device specified.
 
-if [ $# -ne 2 ]; then
+if [ $# -ne 1 ]; then
 	echo
 	echo "Usage: ${0} <destination>"
 	echo
