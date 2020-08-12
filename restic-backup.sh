@@ -20,4 +20,4 @@ fi
 sudo restic backup --repo=${1}/restic-repo/ --cache-dir=${1}/restic-cache/ \
 	--exclude-caches --one-file-system --password-file=/home/andrew/.restic.passwd \
 	--exclude-file=/home/andrew/.restic.excludes --verbose \
-	/etc/ /home/ /opt/ /var/log/
+	/etc/ /home/ /opt/ /srv/ /var/log/
