@@ -1,0 +1,2 @@
+# Rename Raspberry Pi debug probe from ttyAMA* to ttyRASPI*
+ACTION=="add", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="000c", SYMLINK+="ttyRASPI%n"
