@@ -17,7 +17,7 @@ if [ ! -d ${1} ]; then
 	exit 1
 fi
 
-sudo restic backup --repo=${1}/restic-repo/ --cache-dir=${1}/restic-cache/ \
+restic backup --repo=${1}/restic-repo/ \
 	--exclude-caches --one-file-system --password-file=/home/andrew/.restic.passwd \
 	--exclude-file=/home/andrew/.restic.excludes --verbose \
 	/etc/ /home/ /opt/ /srv/ /var/log/ /var/www/
