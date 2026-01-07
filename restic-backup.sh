@@ -20,4 +20,4 @@ fi
 restic backup --repo=${1}/restic-repo/ \
 	--exclude-caches --one-file-system --password-file=/home/andrew/.restic.passwd \
 	--exclude-file=/home/andrew/.restic.excludes --verbose \
-	/etc/ /home/ /opt/ /srv/ /var/log/ /var/www/
+	/etc/ /home/ /opt/ /srv/ /var/log/ /var/www/ /mnt/mx500/
