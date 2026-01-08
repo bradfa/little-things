@@ -1,15 +1,16 @@
 #!/bin/bash
 
 # Takes input of on/off and switches Synaccess PDU and SDWire3 appropriately.
+# Assumes the PDU is using outlet 2 as this one does not glitch at PDU power-up
 
 # TODO: Get rid of the sleeps once sdwire accepts --wait
 
 if [ "${1}" = "on" ]; then
 	sdwire switch target
 	sleep 2
-	synpdu 1 on
+	synpdu 2 on
 elif [ "${1}" = "off" ]; then
-	synpdu 1 off
+	synpdu 2 off
 	sleep 1
 	sdwire switch host
 	sleep 2
