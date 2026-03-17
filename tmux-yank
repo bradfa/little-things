@@ -1,0 +1,8 @@
+#!/bin/bash
+# Resolve DISPLAY from tmux session environment at copy time,
+# so copy works regardless of whether tmux was started locally or over SSH.
+TMUX_DISPLAY=$(tmux show-environment DISPLAY 2>/dev/null | grep -v '^-' | sed 's/^DISPLAY=//')
+if [ -n "$TMUX_DISPLAY" ]; then
+    export DISPLAY="$TMUX_DISPLAY"
+fi
+exec xsel -i -p
